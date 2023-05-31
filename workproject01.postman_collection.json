@@ -1,0 +1,25 @@
+{
+	"info": {
+		"_postman_id": "9b4e3387-7662-47c6-824e-676acafbad2e",
+		"name": "workproject01",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "User",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
