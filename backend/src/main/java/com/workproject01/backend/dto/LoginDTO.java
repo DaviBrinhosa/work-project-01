@@ -22,6 +22,5 @@ public class LoginDTO {
 	public String getEmailLogin() {
 		return emailLogin;
 	}
-	
-	
+
 }

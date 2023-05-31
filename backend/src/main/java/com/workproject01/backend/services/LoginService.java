@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.workproject01.backend.dto.LoginDTO;
+import com.workproject01.backend.dto.LoginRequestDTO;
 import com.workproject01.backend.entities.Login;
 import com.workproject01.backend.repositories.LoginRepository;
 
@@ -15,6 +16,13 @@ public class LoginService {
 	
 	@Autowired
 	private LoginRepository loginRepository;
+	
+	@Transactional(readOnly = false)
+	public void save(LoginRequestDTO data) {
+		Login loginData = new Login(data);
+		loginRepository.save(loginData);
+		return;
+	}
 	
 	@Transactional(readOnly = true)
 	public List<LoginDTO> findAll() {

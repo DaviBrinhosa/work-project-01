@@ -1,7 +1,8 @@
 package com.workproject01.backend.entities;
 
-import java.util.Date;
 import java.util.Objects;
+
+import com.workproject01.backend.dto.LoginRequestDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,9 +32,7 @@ public class Login {
 	public Login() {
 	}
 
-	public Login(Long idLogin, String usernameLogin, String fullnameLogin, String passwordLogin, String emailLogin,
-			String genreLogin, Date birthdateLogin, String userPrivilegeLogin, String statusLogin,
-			Date inactivedateLogin) {
+	public Login(Long idLogin, String usernameLogin, String fullnameLogin, String passwordLogin, String emailLogin) {
 		this.idLogin = idLogin;
 		this.fullnameLogin = fullnameLogin;
 		this.passwordLogin = passwordLogin;
@@ -89,4 +88,10 @@ public class Login {
 		return Objects.equals(emailLogin, other.emailLogin) && Objects.equals(idLogin, other.idLogin);
 	}
 	
+	public Login(LoginRequestDTO data) {
+		this.fullnameLogin = data.fullnameLogin();
+		this.passwordLogin = data.passwordLogin();
+		this.emailLogin = data.emailLogin();
+	}
+
 }
