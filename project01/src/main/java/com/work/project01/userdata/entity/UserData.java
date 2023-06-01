@@ -1,9 +1,8 @@
-package com.work.project01.user.entity;
+package com.work.project01.userdata.entity;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,7 +11,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "user_data")
-public class UserRegister implements Serializable {
+public class UserData implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -20,24 +19,21 @@ public class UserRegister implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "name")
-	private String nameLogin;
+	private String name;
 	
-	@Column(name = "password")
-	private String passwordLogin;
+	private String password;
 	
-	@Column(name = "email")
-	private String emailLogin;
+	private String email;
 
-	public UserRegister() {
+	public UserData() {
 		
 	}
 
-	public UserRegister(Long id, String nameLogin, String passwordLogin, String emailLogin) {
+	public UserData(Long id, String name, String password, String email) {
 		this.id = id;
-		this.nameLogin = nameLogin;
-		this.passwordLogin = passwordLogin;
-		this.emailLogin = emailLogin;
+		this.name = name;
+		this.password = password;
+		this.email = email;
 	}
 
 	public Long getId() {
@@ -48,28 +44,28 @@ public class UserRegister implements Serializable {
 		this.id = id;
 	}
 
-	public String getNameLogin() {
-		return nameLogin;
+	public String getName() {
+		return name;
 	}
 
-	public void setNameLogin(String nameLogin) {
-		this.nameLogin = nameLogin;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getPasswordLogin() {
-		return passwordLogin;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPasswordLogin(String passwordLogin) {
-		this.passwordLogin = passwordLogin;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getEmailLogin() {
-		return emailLogin;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setEmailLogin(String emailLogin) {
-		this.emailLogin = emailLogin;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@Override
@@ -88,7 +84,7 @@ public class UserRegister implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UserRegister other = (UserRegister) obj;
+		UserData other = (UserData) obj;
 		if (id == null) {
 			if (other.id != null) 
 				return false;
