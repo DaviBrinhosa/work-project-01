@@ -14,10 +14,46 @@
 			"response": []
 		},
 		{
-			"name": "User",
+			"name": "UserResult",
 			"request": {
 				"method": "GET",
 				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "UserResult By Id",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nameLogin\": \"support2\",\n    \"passwordLogin\": \"support123\",\n    \"emailLogin\": \"support2@admin.github.com.br\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user"
+					]
+				}
 			},
 			"response": []
 		}

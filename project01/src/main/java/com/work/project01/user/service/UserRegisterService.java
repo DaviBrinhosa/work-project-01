@@ -14,18 +14,27 @@ import com.work.project01.user.repository.UserRegisterRepository;
 public class UserRegisterService {
 	
 	@Autowired
-	private UserRegisterRepository userRegisterRepository;
+	private final UserRegisterRepository userRepository;
+	
+	public UserRegisterService(UserRegisterRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 	
 	@Transactional(readOnly = true)
 	public List<UserRegisterDTO> findAll() {
-		List<UserRegister> result = userRegisterRepository.findAll();
+		List<UserRegister> result = userRepository.findAll();
 		return result.stream().map(x -> new UserRegisterDTO(x)).toList();
 	}
 	
 	@Transactional(readOnly = true)
 	public UserRegisterDTO findById(Long id) {
-		UserRegister result = userRegisterRepository.findById(id).get();
+		UserRegister result = userRepository.findById(id).get();
 		return new UserRegisterDTO(result);
+	}
+	
+	public void createUser(UserRegister user) {
+		userRepository.save(user);
+		return;
 	}
 	
 }

@@ -13,10 +13,11 @@ public class Auth implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Id
+	
 	@Column(name = "password")
 	private String passwordLogin;
 	
+	@Id
 	@Column(name = "email")
 	private String emailLogin;
 
