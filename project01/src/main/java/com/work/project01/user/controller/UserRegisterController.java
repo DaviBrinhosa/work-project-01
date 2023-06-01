@@ -16,7 +16,7 @@ import com.work.project01.user.entity.UserRegister;
 import com.work.project01.user.service.UserRegisterService;
 
 @RestController
-@RequestMapping(value = "/userResult")
+@RequestMapping(value = "/userRegister")
 public class UserRegisterController {
 	
 	@Autowired
@@ -38,7 +38,7 @@ public class UserRegisterController {
 		return result;
 	}
 	
-	@PostMapping(value = "/user")
+	@PostMapping(value = "/postUser")
 	public ResponseEntity<String> createUser(@RequestBody UserRegister user) {
 		userService.createUser(user);
 		return ResponseEntity.ok("Usuario Cadastrado");
