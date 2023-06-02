@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.work.project01.aesutil.AESUtil;
 import com.work.project01.userdata.dto.UserDataDTO;
 import com.work.project01.userdata.entity.UserData;
 import com.work.project01.userdata.service.UserDataService;
@@ -20,6 +21,14 @@ import com.work.project01.userdata.service.UserDataService;
 @RestController
 @RequestMapping(value = "/userData")
 public class UserDataController {
+	
+    protected String key = "6Ya4p@!jp@ed";
+    
+	private AESUtil aESUtil = new AESUtil();
+
+	protected AESUtil getAESUtil() {
+		return aESUtil;
+	}
 	
 	@Autowired
 	private final UserDataService userService;
@@ -54,6 +63,12 @@ public class UserDataController {
            
         try {
             UserDataDTO user = userService.findByEmail(email);
+
+    		/*String hashedUsername = request.getEmail();
+    		String hashedPassword = request.getSecurityCredentials();
+    						
+    		credential.setSecurityPrincipal(getAESUtil().decrypt(key, hashedUsername));
+    		credential.setSecurityCredentials(getAESUtil().decrypt(key, hashedPassword));*/
             
             // Verificar se a senha fornecida corresponde à senha armazenada para o usuário
             if (user.getPassword().equals(password)) {
