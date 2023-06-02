@@ -8,4 +8,6 @@ import com.work.project01.userdata.entity.UserData;
 @Repository
 public interface UserDataRepository extends JpaRepository<UserData, Long> {
 	
+	UserData findByEmail(String email);
+	
 }

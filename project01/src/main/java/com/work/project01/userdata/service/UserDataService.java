@@ -1,6 +1,7 @@
 package com.work.project01.userdata.service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,5 +37,14 @@ public class UserDataService {
 		userRepository.save(user);
 		return;
 	}
+	
+    @Transactional(readOnly = true)
+    public UserDataDTO findByEmail(String email) {
+        UserData result = userRepository.findByEmail(email);
+        if (result == null) {
+            throw new NoSuchElementException("Usuário não encontrado com o e-mail: " + email);
+        }
+        return new UserDataDTO(result);
+    }
 	
 }
