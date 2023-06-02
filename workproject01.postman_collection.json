@@ -6,37 +6,52 @@
 	},
 	"item": [
 		{
-			"name": "Auth",
+			"name": "UserData",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/userData",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"userData"
+					]
+				}
 			},
 			"response": []
 		},
 		{
-			"name": "UserResult",
+			"name": "UserData By Id",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/userData/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"userData",
+						"1"
+					]
+				}
 			},
 			"response": []
 		},
 		{
-			"name": "UserResult By Id",
-			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "User",
+			"name": "UserData to register",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"nameLogin\": \"support2\",\n    \"passwordLogin\": \"support123\",\n    \"emailLogin\": \"support2@admin.github.com.br\"\n}",
+					"raw": "{\n    \"name\": \"support2\",\n    \"password\": \"support123\",\n    \"email\": \"support2@admin.github.com.br\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -44,14 +59,44 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/user",
+					"raw": "http://localhost:8080/userData/register",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"user"
+						"userData",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserData to auth",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\": \"support123\",\n    \"email\": \"support2@admin.github.com.br\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/userData/auth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"userData",
+						"auth"
 					]
 				}
 			},
