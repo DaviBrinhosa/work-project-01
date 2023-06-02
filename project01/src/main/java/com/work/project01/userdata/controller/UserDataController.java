@@ -22,7 +22,7 @@ import com.work.project01.userdata.service.UserDataService;
 @RequestMapping(value = "/userData")
 public class UserDataController {
 	
-    protected String key = "6Ya4p@!jp@ed";
+    String key = AESUtil.getKey();
     
 	private AESUtil aESUtil = new AESUtil();
 
@@ -51,6 +51,10 @@ public class UserDataController {
 	
 	@PostMapping(value = "/register")
 	public ResponseEntity<String> createUser(@RequestBody UserData user) {
+		String hashedEmail = user.getEmail();
+		String decryptEmail = getAESUtil().decrypt(key, hashedEmail);
+		user.setEmail(decryptEmail);
+		
 		userService.createUser(user);
 		return ResponseEntity.ok("Usuário cadastrado com sucesso! Efetue seu login.");
 	}
@@ -58,26 +62,26 @@ public class UserDataController {
 	@PostMapping(value = "/auth")
     public ResponseEntity<String> authenticateUser(@RequestBody UserDataDTO request) {
         
-        String email = request.getEmail();
-        String password = request.getPassword();
+		String requestEmail = getAESUtil().decrypt(key, request.getEmail());
+		String requestPassword = getAESUtil().decrypt(key, request.getPassword());
+		
+		System.out.println(requestEmail + " | " + requestPassword);
            
         try {
-            UserDataDTO user = userService.findByEmail(email);
+            UserDataDTO user = userService.findByEmail(requestEmail);
 
-    		/*String hashedUsername = request.getEmail();
-    		String hashedPassword = request.getSecurityCredentials();
+    		String hashedPassword = user.getPassword();
     						
-    		credential.setSecurityPrincipal(getAESUtil().decrypt(key, hashedUsername));
-    		credential.setSecurityCredentials(getAESUtil().decrypt(key, hashedPassword));*/
+    		String decryptPassBase = getAESUtil().decrypt(key, hashedPassword);
             
             // Verificar se a senha fornecida corresponde à senha armazenada para o usuário
-            if (user.getPassword().equals(password)) {
-                return ResponseEntity.ok(email);
+            if (decryptPassBase.equals(requestPassword)) {
+                return ResponseEntity.ok(requestEmail);
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas!");
             }
         } catch (NoSuchElementException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuário não encontrado com o e-mail: " + email);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuário não encontrado com o e-mail: " + requestEmail);
         }
     }
 	

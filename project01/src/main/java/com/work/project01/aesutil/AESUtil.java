@@ -18,7 +18,12 @@ import java.security.spec.KeySpec;
 import java.util.Objects;
 
 public class AESUtil {
-
+		
+    public static String getKey() {
+    	String key = "banana";
+    	return key;
+    }
+	
 	 public enum DataType {
 	        HEX,
 	        BASE64
