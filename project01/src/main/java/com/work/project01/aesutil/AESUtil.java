@@ -106,6 +106,8 @@ public class AESUtil {
 	            byte[] decrypted = doFinal(Cipher.DECRYPT_MODE, key, iv, encrypted);
 	            return new String(Objects.requireNonNull(decrypted), StandardCharsets.UTF_8);
 	        } catch (Exception e) {
+	            System.out.println("Houve um erro no Decrypt: " + e);
+	            System.out.println(e);
 	            return null;
 	        }
 	    }
@@ -118,6 +120,7 @@ public class AESUtil {
 	            String ct = cipherText.substring(saltLength + ivLength);
 	            return decrypt(salt, iv, passPhrase, ct);
 	        } catch (Exception e) {
+	            System.out.println("Houve um erro no Decrypt: " + e);
 	            return null;
 	        }
 	    }
