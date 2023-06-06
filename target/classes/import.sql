@@ -1,0 +1,3 @@
+--INSERT INTO USER_DATA (name, password, email) VALUES ('admin', 'admin123', 'admin@admin.github.com.br');
+--INSERT INTO USER_DATA (name, password, email) VALUES ('admin', 'e2f4f4cb32b69241007752f1cc261863316af9b8376abd29ade6569ec3a0b237c5f7454e6141e9d91217004b6419f4aeoD7ldljD3BDFqiDYgmajJQ==', 'admin@admin.github.com.br');
+--INSERT INTO USER_DATA (name, password, email) VALUES ('admin', 'e2f4f4cb32b69241007752f1cc261863316af9b8376abd29ade6569ec3a0b237c5f7454e6141e9d91217004b6419f4aeoD7ldljD3BDFqiDYgmajJQ==', '48ff0baaf8adafaacbe382c34422c60c73948303aa41d4b70a2fe75cad45d450922836d6c620bb2a314786d24208d4acRqoLqM1w+nvavXWF/3S9QxMoZU80QRi4WpdUwGOAZS4=');

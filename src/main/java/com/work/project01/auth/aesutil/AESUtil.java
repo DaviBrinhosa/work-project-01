@@ -1,4 +1,4 @@
-package com.work.project01.aesutil;
+package com.work.project01.auth.aesutil;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

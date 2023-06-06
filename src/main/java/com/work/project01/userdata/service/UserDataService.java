@@ -33,10 +33,30 @@ public class UserDataService {
 		return new UserDataDTO(result);
 	}
 	
+	@Transactional
 	public void createUser(UserData user) {
 		userRepository.save(user);
 		return;
 	}
+	
+	@Transactional
+    public UserDataDTO editUser(Long id, UserDataDTO userDataDTO) {
+		UserData user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
+		user.setName(userDataDTO.getName());
+		user.setEmail(userDataDTO.getEmail());
+		user.setPassword(userDataDTO.getPassword());
+        UserData updatedUser = userRepository.save(user);
+
+        return new UserDataDTO(updatedUser);
+    }
+    
+    @Transactional
+    public void deleteUser(Long id) {
+    	UserData user = userRepository.findById(id)
+    			.orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
+        userRepository.delete(user);
+    }
 	
     @Transactional(readOnly = true)
     public UserDataDTO findByEmail(String email) {
