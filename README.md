@@ -1,13 +1,13 @@
-# Sobre o Projeto
+# About the project
 
-[Aplicação em desenvolvimento!!!]
+[Application under development!!!]
 
-Este é o **work-project-01-app**, uma aplicação front-end em desenvolvimento com recursos de cadastro de usuário, tela de login e página inicial responsiva. 
-A aplicação utiliza criptografia de ponta a ponta para garantir a segurança das informações do usuário e também possui sanitização de campos para prevenir ataques XSS.
+This is **work-project-01-api**, a back-end application under development with user registration and login features.
+The application uses end-to-end encryption to ensure the security of user information and also has field sanitization to prevent XSS attacks.
 
-A API relacionada a este projeto está disponível em: [https://github.com/jsidegum/work-project-01-app](https://github.com/jsidegum/work-project-01-app)
+The APP related to this project is available at:  [GitHub APP](https://github.com/jsidegum/work-project-01-app)
 
-## Tecnologias Utilizadas
+## Technologies Used
 
 - Java
 - Spring Boot
@@ -16,8 +16,7 @@ A API relacionada a este projeto está disponível em: [https://github.com/jside
 
 ## Screenshots
 
-## Desenvolvedores
+## Developers
 
 - **Back-end:** Davi Gilvanni Brinhosa Henriques - [GitHub](https://github.com/DaviBrinhosa)
 - **Front-end:** Juliana Sidegum - [GitHub](https://github.com/jsidegum)
-
