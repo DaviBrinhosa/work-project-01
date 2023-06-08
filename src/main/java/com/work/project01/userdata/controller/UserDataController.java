@@ -91,14 +91,16 @@ public class UserDataController {
            
         try {
             UserDataDTO user = userService.findByEmail(requestEmail);
-
+            
+            Long id = user.getId();
+            
     		String hashedPassword = user.getPassword();
     						
     		String decryptPassBase = getAESUtil().decrypt(key, hashedPassword);
             
             // Verificar se a senha fornecida corresponde à senha armazenada para o usuário
             if (decryptPassBase.equals(requestPassword)) {
-                return ResponseEntity.ok(requestEmail);
+                return ResponseEntity.ok("{id: '" + id + "', email: '" + requestEmail + "'}");
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas!");
             }
