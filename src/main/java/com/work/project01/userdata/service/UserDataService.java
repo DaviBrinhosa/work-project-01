@@ -40,6 +40,16 @@ public class UserDataService {
 	}
 	
 	@Transactional
+	public boolean validateEmail(String email) {
+		UserData result = userRepository.validateEmail(email);
+		if (result == null) {
+			return false;
+		}
+    	return true;
+	}
+	
+	
+	@Transactional
     public UserDataDTO editUser(Long id, UserDataDTO userDataDTO) {
 		UserData user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));

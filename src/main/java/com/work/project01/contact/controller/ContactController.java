@@ -28,7 +28,7 @@ import com.work.project01.contact.service.ContactService;
 import com.work.project01.userdata.entity.UserData;
 
 @RestController
-@RequestMapping("/userData/{userId}/contacts")
+@RequestMapping("/contacts/{userId}")
 public class ContactController {
 	
 String key = AESUtil.getKey();

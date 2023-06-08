@@ -51,25 +51,36 @@ public class UserDataController {
 		return result;
 	}	
 	
-	@PostMapping(value = "/register")
+	@PostMapping
 	public ResponseEntity<String> createUser(@RequestBody UserData user) {
-		String hashedEmail = user.getEmail();
-		String decryptEmail = getAESUtil().decrypt(key, hashedEmail);
+		String decryptEmail = getAESUtil().decrypt(key, user.getEmail());
+		String decryptName = getAESUtil().decrypt(key, user.getName());
 		user.setEmail(decryptEmail);
+		user.setName(decryptName);
 		
-		userService.createUser(user);
-		return ResponseEntity.ok("Usuário cadastrado com sucesso! Efetue seu login.");
+		if(userService.validateEmail(decryptEmail) == true) {
+			return ResponseEntity.ok("Usuário já cadastrado.");
+		} else {
+			userService.createUser(user);
+			return ResponseEntity.ok("Usuário cadastrado com sucesso! Efetue seu login.");
+		}
 	}
 	
     @PutMapping("/{id}")
-    public UserDataDTO editUser(@PathVariable Long id, @RequestBody UserDataDTO userDTO) {
-        return userService.editUser(id, userDTO);
+    public ResponseEntity<String> editUser(@PathVariable Long id, @RequestBody UserDataDTO userDTO) {
+    	String decryptEmail = getAESUtil().decrypt(key, userDTO.getEmail());
+		String decryptName = getAESUtil().decrypt(key, userDTO.getName());
+    	userDTO.setEmail(decryptEmail);
+		userDTO.setName(decryptName);
+    	
+    	userService.editUser(id, userDTO);
+    	return ResponseEntity.ok("Usuário editado com sucesso!");
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
     	userService.deleteUser(id);
-        return ResponseEntity.noContent().build();
+    	return ResponseEntity.ok("Usuário deletado com sucesso!");
     }
 	
 	@GetMapping(value = "/auth")

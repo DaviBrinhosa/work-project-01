@@ -6,101 +6,356 @@
 	},
 	"item": [
 		{
+			"name": "Address",
+			"item": [
+				{
+					"name": "Address",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/address",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Address",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"admin\",\n    \"password\": \"e2f4f4cb32b69241007752f1cc261863316af9b8376abd29ade6569ec3a0b237c5f7454e6141e9d91217004b6419f4aeoD7ldljD3BDFqiDYgmajJQ==\",\n    \"email\": \"48ff0baaf8adafaacbe382c34422c60c73948303aa41d4b70a2fe75cad45d450922836d6c620bb2a314786d24208d4acRqoLqM1w+nvavXWF/3S9QxMoZU80QRi4WpdUwGOAZS4=\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/address",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Address (id)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/address",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Address (id)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/address",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"address"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contact",
+			"item": [
+				{
+					"name": "Contact (IdUser)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/contacts/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contacts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact (IdUser/List)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/contacts/1/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contacts",
+								"1",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact (IdUser/IdContact)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/contacts/1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contacts",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact (IdUser/IdContact)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/contacts/1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contacts",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact (IdUser/IdContact)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/contacts/1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contacts",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "UserData",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/userData",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"userData"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "UserData By Id",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/userData/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"userData",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "UserData to register",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\": \"admin\",\n    \"password\": \"e2f4f4cb32b69241007752f1cc261863316af9b8376abd29ade6569ec3a0b237c5f7454e6141e9d91217004b6419f4aeoD7ldljD3BDFqiDYgmajJQ==\",\n    \"email\": \"48ff0baaf8adafaacbe382c34422c60c73948303aa41d4b70a2fe75cad45d450922836d6c620bb2a314786d24208d4acRqoLqM1w+nvavXWF/3S9QxMoZU80QRi4WpdUwGOAZS4=\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"item": [
+				{
+					"name": "UserData",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/userData",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"userData"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/userData/register",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"userData",
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "UserData to auth",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"password\": \"505153ee58745e96972a5865d54e8f6f43ee0c2d85f22fef1aad8fa3cb3b112ef92bab61ec7a3f16755d7974d9e3e499C6MvkYvTDrRpOjYn44hr1Q==\",\n    \"email\": \"d56b10d4ab88173307248a588c58863e79ae8a2c72e726a71b5d9b88ebb904ec69a3b8fe058b9956dd38df360ed67b7clZ+cAm0PY8Y0tBSW68kcpvK9RNxH/63sYFlBSSC0CiU=\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "UserData",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"505153ee58745e96972a5865d54e8f6f43ee0c2d85f22fef1aad8fa3cb3b112ef92bab61ec7a3f16755d7974d9e3e499C6MvkYvTDrRpOjYn44hr1Q==\",\n    \"password\": \"e2f4f4cb32b69241007752f1cc261863316af9b8376abd29ade6569ec3a0b237c5f7454e6141e9d91217004b6419f4aeoD7ldljD3BDFqiDYgmajJQ==\",\n    \"email\": \"48ff0baaf8adafaacbe382c34422c60c73948303aa41d4b70a2fe75cad45d450922836d6c620bb2a314786d24208d4acRqoLqM1w+nvavXWF/3S9QxMoZU80QRi4WpdUwGOAZS4=\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/userData",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"userData"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/userData/auth",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"userData",
-						"auth"
-					]
+				{
+					"name": "UserData (auth)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"505153ee58745e96972a5865d54e8f6f43ee0c2d85f22fef1aad8fa3cb3b112ef92bab61ec7a3f16755d7974d9e3e499C6MvkYvTDrRpOjYn44hr1Q==\",\n    \"email\": \"d56b10d4ab88173307248a588c58863e79ae8a2c72e726a71b5d9b88ebb904ec69a3b8fe058b9956dd38df360ed67b7clZ+cAm0PY8Y0tBSW68kcpvK9RNxH/63sYFlBSSC0CiU=\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/userData/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"userData",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserData (id)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/userData/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"userData",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserData (id)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"name\": \"d56b10d4ab88173307248a588c58863e79ae8a2c72e726a71b5d9b88ebb904ec69a3b8fe058b9956dd38df360ed67b7clZ+cAm0PY8Y0tBSW68kcpvK9RNxH/63sYFlBSSC0CiU=\",\n        \"password\": \"e2f4f4cb32b69241007752f1cc261863316af9b8376abd29ade6569ec3a0b237c5f7454e6141e9d91217004b6419f4aeoD7ldljD3BDFqiDYgmajJQ==\",\n        \"email\": \"d56b10d4ab88173307248a588c58863e79ae8a2c72e726a71b5d9b88ebb904ec69a3b8fe058b9956dd38df360ed67b7clZ+cAm0PY8Y0tBSW68kcpvK9RNxH/63sYFlBSSC0CiU=\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/userData/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"userData",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserData (id)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/userData/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"userData",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }
