@@ -83,7 +83,7 @@ public class UserDataController {
     	return ResponseEntity.ok("Usuário deletado com sucesso!");
     }
 	
-	@GetMapping(value = "/auth")
+	@PostMapping(value = "/auth")
     public ResponseEntity<String> authenticateUser(@RequestBody UserDataDTO request) {
         
 		String requestEmail = getAESUtil().decrypt(key, request.getEmail());
