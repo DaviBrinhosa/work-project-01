@@ -24,7 +24,7 @@ public class ContactService {
 	}
 
     @Transactional
-    public List<Contact> contactListByUserId(Long userId) {
+    public List<Contact> contactByUserId(Long userId) {
         return contactRepository.findByUserId(userId);
     }
     
@@ -50,7 +50,7 @@ public class ContactService {
     }
 
     @Transactional
-    public void deleteContactsByIds(Long userId, Long contactId) {
+    public void deleteContactsByIds(Long contactId, Long userId) {
         Optional<Contact> contactOptional = contactRepository.findByIdAndUserId(contactId, userId);
         contactOptional.ifPresent(contactRepository::delete);
     }

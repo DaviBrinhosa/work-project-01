@@ -49,7 +49,7 @@ String key = AESUtil.getKey();
 	@GetMapping
     public ResponseEntity<List<ContactDTO>> contactListByUserId(@PathVariable Long userId) {
     	try {
-	        List<Contact> contacts = contactService.contactListByUserId(userId);
+    		List<Contact> contacts = contactService.contactByUserId(userId);
 	        List<ContactDTO> contactsDTO = convertToDTO(contacts);
 	        return ResponseEntity.ok(contactsDTO);
     	} catch (Exception e) {
@@ -135,16 +135,15 @@ String key = AESUtil.getKey();
 
         if (contact.getAddress() != null) {
             AddressDTO addressDTO = new AddressDTO();
-            
-            addressDTO.setZipCode(contactDTO.getAddress().getZipCode());
-            addressDTO.setStreetAddress(contactDTO.getAddress().getStreetAddress());
-            addressDTO.setBuildingNumber(contactDTO.getAddress().getBuildingNumber());
-            addressDTO.setComplement(contactDTO.getAddress().getComplement());
-            addressDTO.setDistrict(contactDTO.getAddress().getDistrict());
-            addressDTO.setCity(contactDTO.getAddress().getCity());
-            addressDTO.setRegion(contactDTO.getAddress().getRegion());
-            addressDTO.setId(contactDTO.getAddress().getId()); 
-            
+            addressDTO.setId(contact.getAddress().getId());
+            addressDTO.setZipCode(contact.getAddress().getZipCode());
+            addressDTO.setStreetAddress(contact.getAddress().getStreetAddress());
+            addressDTO.setBuildingNumber(contact.getAddress().getBuildingNumber());
+            addressDTO.setComplement(contact.getAddress().getComplement());
+            addressDTO.setDistrict(contact.getAddress().getDistrict());
+            addressDTO.setCity(contact.getAddress().getCity());
+            addressDTO.setRegion(contact.getAddress().getRegion());
+
             contactDTO.setAddress(addressDTO);
         }
 
@@ -160,6 +159,7 @@ String key = AESUtil.getKey();
         if (contactDTO.getAddress() != null) {
             Address address = new Address();
 
+            address.setId(contactDTO.getAddress().getId()); 
             address.setZipCode(contactDTO.getAddress().getZipCode());
             address.setStreetAddress(contactDTO.getAddress().getStreetAddress());
             address.setBuildingNumber(contactDTO.getAddress().getBuildingNumber());
@@ -167,7 +167,6 @@ String key = AESUtil.getKey();
             address.setDistrict(contactDTO.getAddress().getDistrict());
             address.setCity(contactDTO.getAddress().getCity());
             address.setRegion(contactDTO.getAddress().getRegion());
-            address.setId(contactDTO.getAddress().getId()); 
             
             contact.setAddress(address);
         }

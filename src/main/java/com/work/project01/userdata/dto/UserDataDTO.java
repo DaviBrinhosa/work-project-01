@@ -59,4 +59,5 @@ public class UserDataDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 }

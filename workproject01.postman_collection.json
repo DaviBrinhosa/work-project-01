@@ -61,14 +61,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/address",
+							"raw": "http://localhost:8080/address/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"address"
+								"address",
+								"1"
 							]
 						}
 					},
@@ -79,15 +80,25 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"zipCode\": \"1\",\n    \"streetAddress\": \"1\",\n    \"buildingNumber\": \"1\",\n    \"complement\": \"1\",\n    \"district\": \"2\",\n    \"city\": \"2\",\n    \"region\": \"2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:8080/address",
+							"raw": "http://localhost:8080/address/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"address"
+								"address",
+								"1"
 							]
 						}
 					},
@@ -103,6 +114,35 @@
 					"request": {
 						"method": "GET",
 						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/contacts/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contacts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact (IdUser)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"banana\",\n    \"cellphone\": \"9999999999\",\n    \"email\": \"123@banana.com.br\",\n\t\"user\": \"1\",\n\t\"address\": {\n                \"user\": \"1\",\n\t\t\t\t\"zipCode\": \"1\",\n\t\t\t\t\"streetAddress\": \"1\",\n\t\t\t\t\"buildingNumber\": \"1\",\n\t\t\t\t\"complement\": \"1\",\n\t\t\t\t\"district\": \"1\",\n\t\t\t\t\"city\": \"1\",\n\t\t\t\t\"region\": \"1\"\n\t\t\t\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:8080/contacts/1",
 							"protocol": "http",
@@ -165,6 +205,15 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"name\": \"banana\",\n    \"cellphone\": \"9999999999\",\n    \"email\": \"123@banana.com.br\",\n    \"address\": {\n        \"zipCode\": \"2\",\n        \"streetAddress\": \"2\",\n        \"buildingNumber\": \"2\",\n        \"complement\": \"2\",\n        \"district\": \"2\",\n        \"city\": \"2\",\n        \"region\": \"2\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:8080/contacts/1/1",
 							"protocol": "http",

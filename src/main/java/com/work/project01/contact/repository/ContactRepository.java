@@ -15,9 +15,9 @@ public interface ContactRepository extends JpaRepository<Contact, Long> {
 	
 	List<Contact> findByUserId(Long userId);
 	
-    Optional<Contact> findByIdAndUserId(Long id, Long idUser);
+    Optional<Contact> findByIdAndUserId(Long contactId, Long userId);
     
-    Page<Contact> findByUserId(Long idUser, Pageable pageable);   
+    Page<Contact> findByUserId(Long userId, Pageable pageable);   
     
     @Query("SELECT c FROM Contact c WHERE c.user.id = :userId AND (LOWER(c.name) LIKE %:term% OR LOWER(c.email) LIKE %:term% OR LOWER(c.address) LIKE %:term% OR c.cellphone LIKE %:term%)")
     Page<Contact> findByUserIdAndTerm(@Param("userId") Long userId, @Param("term") String term, Pageable pageable);
