@@ -79,7 +79,7 @@ String key = AESUtil.getKey();
     }
     
     @PostMapping
-    public ResponseEntity<ContactDTO> insertContact(@PathVariable Long userId, @RequestBody ContactDTO contactDTO) {
+    public ResponseEntity<String> insertContact(@PathVariable Long userId, @RequestBody ContactDTO contactDTO) {
     	try {
 	        Contact contact = convertToEntity(contactDTO);
 	        UserData user = new UserData();
@@ -87,16 +87,18 @@ String key = AESUtil.getKey();
 	        contact.setUser(user);
 	        contact.setEmail(contactDTO.getEmail());
 	        contact.setCellphone(contactDTO.getCellphone());
-	        Contact insertContact = contactService.saveContact(contact);
-	        ContactDTO insertContactDTO = convertToDTO(insertContact);
-	        return ResponseEntity.status(HttpStatus.CREATED).body(insertContactDTO);
+	        contactService.saveContact(contact);
+	        
+	        String message = "Contato criado com sucesso!";
+	        return ResponseEntity.status(HttpStatus.CREATED).body(message);
     	} catch (Exception e) {
-    		return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
+    		String invalidMessage = "Não foi possivel criar o contato! Contar o suporte caso persiste o erro";
+            return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(invalidMessage);
     	}
     }
 
     @PutMapping("/{contactId}")
-    public ResponseEntity<ContactDTO> editContact(
+    public ResponseEntity<String> editContact(
             @PathVariable Long userId,
             @PathVariable Long contactId,
             @RequestBody ContactDTO contactDTO
@@ -106,18 +108,20 @@ String key = AESUtil.getKey();
             Contact contact = convertToEntity(contactDTO);
             contact.setId(contactId);
             contact.setUser(contactOptional.get().getUser());
-            Contact editedContact = contactService.saveContact(contact);
-            ContactDTO editedContactDTO = convertToDTO(editedContact);
-            return ResponseEntity.ok(editedContactDTO);
+            contactService.saveContact(contact);
+            
+            String message = "Contato editado com sucesso!";
+            return ResponseEntity.status(HttpStatus.CREATED).body(message);
         } else {
-            return ResponseEntity.notFound().build();
+        	String invalidMessage = "Não foi possivel editar o contato! Contar o suporte caso persiste o erro";
+            return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(invalidMessage);
         }
     }
 
     @DeleteMapping("/{contactId}")
-    public ResponseEntity<Void> deleteContacts(@PathVariable Long userId, @PathVariable Long contactId) {
+    public ResponseEntity<String> deleteContacts(@PathVariable Long userId, @PathVariable Long contactId) {
         contactService.deleteContactsByIds(userId, contactId);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("Contato deletado com sucesso!");
     }
 
     private List<ContactDTO> convertToDTO(List<Contact> contacts) {

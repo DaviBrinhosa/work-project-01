@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.work.project01.auth.aesutil.AESUtil;
 import com.work.project01.userdata.dto.UserDataDTO;
 import com.work.project01.userdata.entity.UserData;
@@ -59,7 +61,8 @@ public class UserDataController {
 		user.setName(decryptName);
 		
 		if(userService.validateEmail(decryptEmail) == true) {
-			return ResponseEntity.ok("Usuário já cadastrado.");
+			String invalidMessage = "Usuário já cadastrado.";
+            return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(invalidMessage);
 		} else {
 			userService.createUser(user);
 			return ResponseEntity.ok("Usuário cadastrado com sucesso! Efetue seu login.");
@@ -97,10 +100,17 @@ public class UserDataController {
     		String hashedPassword = user.getPassword();
     						
     		String decryptPassBase = getAESUtil().decrypt(key, hashedPassword);
-            
+    		
+    		JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("id", id);
+            jsonObject.addProperty("email", requestEmail);
+    		
+    		Gson gson = new Gson();
+            String messageJSON = gson.toJson(jsonObject);
+    		
             // Verificar se a senha fornecida corresponde à senha armazenada para o usuário
             if (decryptPassBase.equals(requestPassword)) {
-                return ResponseEntity.ok("{id: '" + id + "', email: '" + requestEmail + "'}");
+                return ResponseEntity.ok(messageJSON);
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas!");
             }
