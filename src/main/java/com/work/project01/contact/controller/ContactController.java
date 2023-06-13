@@ -98,30 +98,17 @@ String key = AESUtil.getKey();
     }
 
     @PutMapping("/{contactId}")
-    public ResponseEntity<String> editContact(
-            @PathVariable Long userId,
-            @PathVariable Long contactId,
-            @RequestBody ContactDTO contactDTO
-    ) {
-        Optional<Contact> contactOptional = contactService.searchContactById(userId, contactId);
-        if (contactOptional.isPresent()) {
-            Contact contact = convertToEntity(contactDTO);
-            contact.setId(contactId);
-            contact.setUser(contactOptional.get().getUser());
-            contactService.saveContact(contact);
-            
-            String message = "Contato editado com sucesso!";
-            return ResponseEntity.status(HttpStatus.CREATED).body(message);
-        } else {
-        	String invalidMessage = "Não foi possivel editar o contato! Contar o suporte caso persiste o erro";
-            return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(invalidMessage);
-        }
+    public ResponseEntity<String> editContact(@PathVariable Long contactId, @RequestBody ContactDTO contactDTO) {
+    	contactService.editContact(contactId, contactDTO);
+    	String message = "Contato editado com sucesso!";
+        return ResponseEntity.status(HttpStatus.OK).body(message);
     }
 
     @DeleteMapping("/{contactId}")
-    public ResponseEntity<String> deleteContacts(@PathVariable Long userId, @PathVariable Long contactId) {
-        contactService.deleteContactsByIds(userId, contactId);
-        return ResponseEntity.ok("Contato deletado com sucesso!");
+    public ResponseEntity<String> deleteContacts(@PathVariable Long contactId) {
+    	contactService.deleteContacts(contactId);
+    	String message = "Contato deletado com sucesso!";
+        return ResponseEntity.status(HttpStatus.OK).body(message);
     }
 
     private List<ContactDTO> convertToDTO(List<Contact> contacts) {
