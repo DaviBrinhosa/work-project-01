@@ -55,18 +55,22 @@ public class UserDataController {
 	
 	@PostMapping
 	public ResponseEntity<String> createUser(@RequestBody UserData user) {
-		String decryptEmail = getAESUtil().decrypt(key, user.getEmail());
-		String decryptName = getAESUtil().decrypt(key, user.getName());
-		user.setEmail(decryptEmail);
-		user.setName(decryptName);
-		
-		if(userService.validateEmail(decryptEmail) == true) {
-			String invalidMessage = "Usuário já cadastrado.";
-            return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(invalidMessage);
-		} else {
-			userService.createUser(user);
-			return ResponseEntity.ok("Usuário cadastrado com sucesso! Efetue seu login.");
-		}
+        try {
+    		String decryptEmail = getAESUtil().decrypt(key, user.getEmail());
+    		String decryptName = getAESUtil().decrypt(key, user.getName());
+    		user.setEmail(decryptEmail);
+    		user.setName(decryptName);
+    		
+    		if(userService.validateEmail(decryptEmail) == true) {
+    			String invalidMessage = "Usuário já cadastrado.";
+                return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(invalidMessage);
+    		} else {
+    			userService.createUser(user);
+    			return ResponseEntity.ok("Usuário cadastrado com sucesso! Efetue seu login.");
+    		}
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Favor tentar novamente o cadatro.");
+        }
 	}
 	
     @PutMapping("/{id}")
