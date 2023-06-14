@@ -43,7 +43,9 @@ public class Contact implements Serializable {
 	}
 
 	public Contact(Long id, String name, String cellphone, String email) {
-		this.id = id;
+		if (id != null) {
+	        this.id = id;
+	    }
 		this.name = name;
 		this.cellphone = cellphone;
 		this.email = email;
