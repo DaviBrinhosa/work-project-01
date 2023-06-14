@@ -30,7 +30,9 @@ public class UserData implements Serializable {
 	}
 
 	public UserData(Long id, String name, String password, String email) {
-		this.id = id;
+	    if (id != null) {
+	        this.id = id;
+	    }
 		this.name = name;
 		this.password = password;
 		this.email = email;

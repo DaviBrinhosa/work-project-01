@@ -63,8 +63,6 @@ public class ContactService {
              address.setDistrict(contactDTO.getAddress().getDistrict());
              address.setCity(contactDTO.getAddress().getCity());
              address.setRegion(contactDTO.getAddress().getRegion());
-             
-             contact.setAddress(address);
          }
     	
     	Contact updatedContact = contactRepository.save(contact);
