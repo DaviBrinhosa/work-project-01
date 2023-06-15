@@ -1,5 +1,6 @@
 package com.work.project01.userdata.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -17,7 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.work.project01.auth.aesutil.AESUtil;
+import com.work.project01.configuration.aesutil.AESUtil;
+import com.work.project01.configuration.convert.Convert;
 import com.work.project01.userdata.dto.UserDataDTO;
 import com.work.project01.userdata.entity.UserData;
 import com.work.project01.userdata.service.UserDataService;
@@ -33,6 +35,9 @@ public class UserDataController {
 	protected AESUtil getAESUtil() {
 		return aESUtil;
 	}
+	
+	Convert convert = new Convert();
+	Date dataAtual = new Date();
 	
 	@Autowired
 	private final UserDataService userService;
@@ -56,12 +61,18 @@ public class UserDataController {
 	@PostMapping
 	public ResponseEntity<String> createUser(@RequestBody UserData user) {
         try {
-    		String decryptEmail = getAESUtil().decrypt(key, user.getEmail());
-    		String decryptName = getAESUtil().decrypt(key, user.getName());
-    		user.setEmail(decryptEmail);
+        	String decryptName = getAESUtil().decrypt(key, user.getName());
+        	String decryptEmail = getAESUtil().decrypt(key, user.getEmail());
+        	String username = decryptName.replaceAll("\\s+", "");
+        	
     		user.setName(decryptName);
-    		
-    		if(userService.validateEmail(decryptEmail) == true) {
+    		//Password stay encrypted
+        	user.setEmail(decryptEmail);
+        	user.setUsername(username);       	
+        	user.setUserPrivilege("Client");
+        	user.setStatus("Active");
+        	
+    		if(userService.validateIfExist(decryptEmail, username) == true) {
     			String invalidMessage = "Usuário já cadastrado.";
                 return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(invalidMessage);
     		} else {
@@ -75,13 +86,44 @@ public class UserDataController {
 	
     @PutMapping("/{id}")
     public ResponseEntity<String> editUser(@PathVariable Long id, @RequestBody UserDataDTO userDTO) {
-    	String decryptEmail = getAESUtil().decrypt(key, userDTO.getEmail());
-		String decryptName = getAESUtil().decrypt(key, userDTO.getName());
-    	userDTO.setEmail(decryptEmail);
-		userDTO.setName(decryptName);
-    	
-    	userService.editUser(id, userDTO);
-    	return ResponseEntity.ok("Usuário editado com sucesso!");
+        try {        	
+        	String decryptName = getAESUtil().decrypt(key, userDTO.getName());
+        	String decryptEmail = getAESUtil().decrypt(key, userDTO.getEmail());
+        	String decryptUsername = getAESUtil().decrypt(key, userDTO.getUsername());
+        	String decryptGenre = getAESUtil().decrypt(key, userDTO.getGenre());
+        	String decryptBirthdate = getAESUtil().decrypt(key, convert.dateToString(userDTO.getBirthdate()));
+        	String decryptUserPrivilege = getAESUtil().decrypt(key, userDTO.getUserPrivilege());
+        	String decryptStatus = getAESUtil().decrypt(key, userDTO.getStatus());
+        	
+        	UserDataDTO user = userService.findByEmail(decryptEmail);
+        	
+    		userDTO.setName(decryptName);
+        	userDTO.setEmail(decryptEmail);
+        	userDTO.setUsername(decryptUsername);
+        	userDTO.setGenre(decryptGenre);
+        	userDTO.setBirthdate(convert.stringToDate(decryptBirthdate));
+        	if (decryptUserPrivilege != null) {
+        		userDTO.setUserPrivilege(decryptUserPrivilege);
+        	} else {
+        		userDTO.setUserPrivilege(user.getUserPrivilege());
+        	}
+        	
+        	if (decryptStatus != null) {
+        		userDTO.setStatus(decryptStatus);
+        	} else {
+        		userDTO.setStatus(user.getStatus());
+        	}
+        	
+        	if (decryptStatus != "Inactive" && decryptStatus != null) {
+            	userDTO.setInactiveDate(dataAtual);
+        	} 
+        	
+        	userService.editUser(id, userDTO);
+        	return ResponseEntity.ok("Usuário editado com sucesso!");
+        } catch (Exception e) {
+        	System.out.println(e);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Favor avaliar os dados inseridos.");
+        }
     }
     
     @DeleteMapping("/{id}")
@@ -106,11 +148,15 @@ public class UserDataController {
                 Long hashedId = user.getId();
                 String hashedName = getAESUtil().encrypt(key, user.getName());
                 String hashedEmail = getAESUtil().encrypt(key, user.getEmail());
+                String hashedUserPrivilege = getAESUtil().encrypt(key, user.getUserPrivilege());
+                String hashedToken = getAESUtil().encrypt(key, "token value");
                 
         		JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("id", hashedId);
                 jsonObject.addProperty("name", hashedName);
                 jsonObject.addProperty("email", hashedEmail);
+                jsonObject.addProperty("userPrivilege)", hashedUserPrivilege);
+                jsonObject.addProperty("token", hashedToken);
         		
         		Gson gson = new Gson();
                 String messageJSON = gson.toJson(jsonObject);

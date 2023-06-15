@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.work.project01.address.dto.AddressDTO;
 import com.work.project01.address.service.AddressService;
-import com.work.project01.auth.aesutil.AESUtil;
+import com.work.project01.configuration.aesutil.AESUtil;
 
 @RestController
 @RequestMapping(value = "/address")

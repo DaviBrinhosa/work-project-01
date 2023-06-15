@@ -1,4 +1,4 @@
-package com.work.project01.auth.aesutil;
+package com.work.project01.configuration.aesutil;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -114,11 +114,14 @@ public class AESUtil {
 
 	    public String decrypt(String passPhrase, String cipherText) {
 	        try {
-	            String salt = cipherText.substring(0, saltLength);
-	            int ivLength = IV_SIZE / 4;
-	            String iv = cipherText.substring(saltLength, saltLength + ivLength);
-	            String ct = cipherText.substring(saltLength + ivLength);
-	            return decrypt(salt, iv, passPhrase, ct);
+	            if(cipherText != null) {
+	            	String salt = cipherText.substring(0, saltLength);
+		            int ivLength = IV_SIZE / 4;
+		            String iv = cipherText.substring(saltLength, saltLength + ivLength);
+		            String ct = cipherText.substring(saltLength + ivLength);
+		            return decrypt(salt, iv, passPhrase, ct);
+	            }
+	            return null;
 	        } catch (Exception e) {
 	            System.out.println("Houve um erro no Decrypt: " + e);
 	            return null;

@@ -40,8 +40,8 @@ public class UserDataService {
 	}
 	
 	@Transactional
-	public boolean validateEmail(String email) {
-		UserData result = userRepository.validateEmail(email);
+	public boolean validateIfExist(String email, String username) {
+		UserData result = userRepository.validateIfExist(email, username);
 		if (result == null) {
 			return false;
 		}
@@ -54,8 +54,15 @@ public class UserDataService {
 		UserData user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
 		user.setName(userDataDTO.getName());
-		user.setEmail(userDataDTO.getEmail());
 		user.setPassword(userDataDTO.getPassword());
+		user.setEmail(userDataDTO.getEmail());
+		user.setUsername(userDataDTO.getUsername());
+		user.setGenre(userDataDTO.getGenre());
+		user.setBirthdate(userDataDTO.getBirthdate());
+		user.setUserPrivilege(userDataDTO.getUserPrivilege());
+		user.setStatus(userDataDTO.getStatus());
+    	user.setInactiveDate(userDataDTO.getInactiveDate());
+		
         UserData updatedUser = userRepository.save(user);
 
         return new UserDataDTO(updatedUser);

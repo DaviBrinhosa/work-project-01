@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.work.project01.address.dto.AddressDTO;
 import com.work.project01.address.entity.Address;
-import com.work.project01.auth.aesutil.AESUtil;
+import com.work.project01.configuration.aesutil.AESUtil;
 import com.work.project01.contact.dto.ContactDTO;
 import com.work.project01.contact.entity.Contact;
 import com.work.project01.contact.service.ContactService;

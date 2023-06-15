@@ -12,7 +12,9 @@ public interface UserDataRepository extends JpaRepository<UserData, Long> {
 	
 	UserData findByEmail(String email);
 	
-	@Query("SELECT c FROM UserData c WHERE LOWER(c.email) = LOWER(:email)")
-	UserData validateEmail(@Param("email") String email);
+	@Query("SELECT c FROM UserData c "
+			+ "WHERE LOWER(c.email) = LOWER(:email)"
+			+ "OR LOWER(c.username) = LOWER(:username)")
+	UserData validateIfExist(@Param("email") String email, @Param("username") String username);
 		
 }
