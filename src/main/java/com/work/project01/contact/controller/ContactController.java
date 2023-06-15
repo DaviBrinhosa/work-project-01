@@ -60,7 +60,7 @@ String key = AESUtil.getKey();
     @GetMapping("/list")
     public ResponseEntity<Page<ContactDTO>> findByUserIdList(@PathVariable Long userId, @RequestParam(value = "term", required = false) String term, Pageable pageable) {
     	try {	
-    		Page<ContactDTO> contacts = contactService.findByUserIdList(userId, term, pageable);   
+    		Page<ContactDTO> contacts = contactService.findByUserIdList(userId, term, pageable);
     		return ResponseEntity.ok(contacts);
     	} catch (Exception e) {
     		return ResponseEntity.notFound().build();

@@ -98,28 +98,29 @@ public class UserDataController {
            
         try {
             UserDataDTO user = userService.findByEmail(requestEmail);
-            
-            Long id = user.getId();
-            
-    		String hashedPassword = user.getPassword();
-    						
-    		String decryptPassBase = getAESUtil().decrypt(key, hashedPassword);
-    		
-    		JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("id", id);
-            jsonObject.addProperty("email", requestEmail);
-    		
-    		Gson gson = new Gson();
-            String messageJSON = gson.toJson(jsonObject);
+                      
+    		String decryptPassBase = getAESUtil().decrypt(key, user.getPassword());
     		
             // Verificar se a senha fornecida corresponde à senha armazenada para o usuário
             if (decryptPassBase.equals(requestPassword)) {
+                Long hashedId = user.getId();
+                String hashedName = getAESUtil().encrypt(key, user.getName());
+                String hashedEmail = getAESUtil().encrypt(key, user.getEmail());
+                
+        		JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("id", hashedId);
+                jsonObject.addProperty("name", hashedName);
+                jsonObject.addProperty("email", hashedEmail);
+        		
+        		Gson gson = new Gson();
+                String messageJSON = gson.toJson(jsonObject);
+            	
                 return ResponseEntity.ok(messageJSON);
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas!");
             }
         } catch (NoSuchElementException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuário não encontrado com o e-mail: " + requestEmail);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuário não encontrado. Favor refazer o login");
         }
     }
 	

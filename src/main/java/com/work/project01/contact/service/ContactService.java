@@ -32,11 +32,11 @@ public class ContactService {
 	@Transactional(readOnly = true)
     public Page<ContactDTO> findByUserIdList(Long userId, String term, Pageable pageable) {
 		if (term != null && !term.isEmpty()) {
-		Page<Contact> result = contactRepository.findByUserIdAndTerm(userId, term, pageable);
-		return result.map(x -> new ContactDTO(x));
+			Page<Contact> result = contactRepository.findByUserIdAndTerm(userId, term, pageable);
+			return result.map(x -> new ContactDTO(x));
 		} else {
-		Page<Contact> result = contactRepository.findByUserId(userId, pageable);
-		return result.map(x -> new ContactDTO(x));
+			Page<Contact> result = contactRepository.findByUserId(userId, pageable);
+			return result.map(x -> new ContactDTO(x));
 		}
     }
 	
